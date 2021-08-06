@@ -20,6 +20,7 @@ class Documento(BaseModel):
     usuario_id: Optional[str]
     tipo: str
     grupo: str
+    categoria: str
 
 
 router = APIRouter()
