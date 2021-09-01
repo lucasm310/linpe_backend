@@ -1,0 +1,1 @@
+GRUPOS = ["diretoria", "ligantes", "geral"]
