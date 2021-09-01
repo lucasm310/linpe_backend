@@ -1,14 +1,19 @@
 from botocore.exceptions import ClientError
 
+from app.helpers.logger import get_logger
+
+
 def exception_handler(func):
+    log = get_logger()
+
     def handler(*args, **kwargs):
         try:
             return AWSResponse(func(*args, **kwargs), True)
         except ClientError as error:
-            print(error.response["Error"]["Message"])
+            log.critical(f'erro={error.response["Error"]["Message"]}')
             return AWSResponse(False, False, "Erro Banco de Dados")
         except Exception as e:
-            print(f"{type(e)}-{e}")
+            log.critical(f"erro={type(e)}-{e}")
             return AWSResponse(False, False, "Erro interno")
 
     return handler

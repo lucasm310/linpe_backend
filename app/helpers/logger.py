@@ -11,6 +11,7 @@ def get_logger():
     logger_handler.setFormatter(logging.Formatter(format_string, date_format))
     logger = logging.getLogger("api")
     logger.setLevel("INFO")
+    logger.handlers = []
     logger.addHandler(logger_handler)
     return logger
 
