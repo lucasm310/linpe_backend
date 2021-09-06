@@ -100,16 +100,21 @@ class Cognito:
         if grupos.status is False:
             raise Exception(grupos.error_message)
         user = self.client.admin_get_user(UserPoolId=self.userpoolid, Username=username)
-        if user.status is False:
-            raise Exception(user.error_message)
         usuario = {"grupos": grupos.response}
-        user = user.response
         usuario["username"] = user["Username"]
         for attr in user["UserAttributes"]:
             if attr["Name"] == "name":
                 usuario["nome"] = attr["Value"]
             elif attr["Name"] == "email":
                 usuario["email"] = attr["Value"]
+            elif attr["Name"] == "custom:nivel":
+                usuario["nivel"] = attr["Value"]
+            elif attr["Name"] == "phone_number":
+                usuario["telefone"] = attr["Value"]
+            elif attr["Name"] == "birthdate":
+                usuario["data_nascimento"] = datetime.strptime(attr["Value"], "%Y-%m-%d")
+            elif attr["Name"] == "custom:curso":
+                usuario["curso"] = attr["Value"]
         return usuario
 
     @exception_handler
