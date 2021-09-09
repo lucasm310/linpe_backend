@@ -8,15 +8,15 @@ from .common import GRUPOS
 
 class Evento(BaseModel):
     eventosID: Optional[UUID]
-    nome: Optional[str]
+    nome: Optional[constr(min_length=2)]
     data_inicio: Optional[datetime]
     data_fim: Optional[datetime]
     data_cadastro: Optional[datetime]
-    descricao: Optional[str]
+    descricao: Optional[constr(min_length=2)]
     local: Optional[str]
     all_day: Optional[bool]
     usuario_id: Optional[str]
-    grupo: Optional[str]
+    grupo: Optional[constr(min_length=2)]
 
     @validator("grupo")
     def grupo_validate(cls, value):
@@ -31,3 +31,4 @@ class EventoCreate(Evento):
     data_inicio: datetime
     data_fim: datetime
     grupo: constr(min_length=2)
+    descricao: constr(min_length=2)
