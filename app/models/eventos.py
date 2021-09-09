@@ -31,3 +31,4 @@ class EventoCreate(Evento):
     data_inicio: datetime
     data_fim: datetime
     grupo: constr(min_length=2)
+    descricao: constr(min_length=2)
