@@ -11,7 +11,7 @@ from app.routes.noticias import router as noticias
 from app.routes.usuarios import router as usuarios
 from app.routes.documentos import router as documentos
 
-app = FastAPI()
+app = FastAPI(root_path="/api")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
